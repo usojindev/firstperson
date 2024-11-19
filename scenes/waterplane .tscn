@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnuxnvygxxajv"]
+
+[ext_resource type="Material" uid="uid://bwqjqbj10eohr" path="res://shaders/watershader.tres" id="1_ulepp"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_f7rap"]
+lightmap_size_hint = Vector2i(7, 7)
+material = ExtResource("1_ulepp")
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[node name="endless water" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0167089, 0, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_f7rap")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.586213, 2.55477)
+fov = 34.3

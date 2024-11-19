@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkooyqaiar64c"]
+
+[ext_resource type="Shader" path="res://Shaders/water.gdshader" id="1_61mqq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k3cgc"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ulxky"]
+seamless = true
+as_normal_map = true
+bump_strength = 1.5
+noise = SubResource("FastNoiseLite_k3cgc")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lkqwv"]
+seed = 10
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hgun7"]
+seamless = true
+as_normal_map = true
+bump_strength = 3.1
+noise = SubResource("FastNoiseLite_lkqwv")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_atqyj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e1fj5"]
+seamless = true
+noise = SubResource("FastNoiseLite_atqyj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wh4m2"]
+render_priority = 0
+shader = ExtResource("1_61mqq")
+shader_parameter/albedo = Color(0, 0.321569, 0.431373, 1)
+shader_parameter/albedo2 = Color(0.407843, 0.721569, 0.980392, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.104
+shader_parameter/wave_direction = Vector2(2, 0)
+shader_parameter/wave_direction2 = Vector2(0, 1)
+shader_parameter/time_scale = 0.03
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/color_deep = Color(0.203922, 0.305882, 0.67451, 1)
+shader_parameter/color_shallow = Color(0.517647, 0.72549, 0.964706, 1)
+shader_parameter/beers_law = 2.0
+shader_parameter/depth_offset = -0.75
+shader_parameter/edge_scale = 0.1
+shader_parameter/near = 1.0
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/wave = SubResource("NoiseTexture2D_e1fj5")
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_ulxky")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_hgun7")
+
+[sub_resource type="QuadMesh" id="QuadMesh_f7rap"]
+material = SubResource("ShaderMaterial_wh4m2")
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0167089, 0, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_f7rap")

@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://c2a0mq7af2ml"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_qe4id"]
+[ext_resource type="PackedScene" uid="uid://c5kjaf4y2gimf" path="res://scenes/pause_menu.tscn" id="2_1r07y"]
+[ext_resource type="PackedScene" uid="uid://dcacuve5itkfe" path="res://scenes/Pixel_shader.tscn" id="2_3hv6w"]
+[ext_resource type="PackedScene" uid="uid://dlbtjg54038sy" path="res://Interact/InteractRay.tscn" id="3_isn4e"]
+[ext_resource type="AudioStream" uid="uid://dgonaxbk22se1" path="res://assets/sounds/457463__rudmer_rotteveel__small_flashlight_click_on_02.wav" id="4_7h8k5"]
+[ext_resource type="Texture2D" uid="uid://cge40y5v2t8n" path="res://assets/sprites/astro.png" id="4_dcmq4"]
+[ext_resource type="Script" path="res://scenes/footstep_manager.gd" id="6_5rv5s"]
+[ext_resource type="AudioStream" uid="uid://clrdffy5s4gtn" path="res://assets/sounds/197780__sgossner__footstep-on-stone-3.wav" id="6_85sb2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ve7ot"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i0h4s"]
+height = 1.2
+
+[node name="player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.279809, 1.19209e-07, 2.52737)
+collision_layer = 2
+script = ExtResource("1_qe4id")
+
+[node name="standing_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.999493, 0)
+shape = SubResource("CapsuleShape3D_ve7ot")
+
+[node name="crouching_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6139, 0)
+shape = SubResource("CapsuleShape3D_i0h4s")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="headtilt" type="Node3D" parent="head"]
+
+[node name="Camera3d" type="Camera3D" parent="head/headtilt"]
+
+[node name="pixel shader" parent="head/headtilt/Camera3d" instance=ExtResource("2_3hv6w")]
+visible = false
+
+[node name="InteractRay" parent="head" instance=ExtResource("3_isn4e")]
+
+[node name="flashlight" type="SpotLight3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47811, -0.48193, 0)
+visible = false
+light_energy = 2.521
+light_indirect_energy = 1.715
+light_volumetric_fog_energy = 1.758
+light_projector = ExtResource("4_dcmq4")
+light_size = 0.038
+shadow_enabled = true
+spot_range = 15.019
+spot_angle = 33.1
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="head/flashlight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47811, -1.31807, 0)
+stream = ExtResource("4_7h8k5")
+bus = &"Sound Effects"
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 2, 0)
+
+[node name="hand" type="Node3D" parent="."]
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_1r07y")]
+
+[node name="footstep_manager" type="Node3D" parent="." node_paths=PackedStringArray("ground_pos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+script = ExtResource("6_5rv5s")
+footstep_sounds = Array[AudioStreamWAV]([ExtResource("6_85sb2")])
+ground_pos = NodePath("../GroundPosition")
+
+[node name="GroundPosition" type="Marker3D" parent="."]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqsdrrehnj1g"]
+
+[ext_resource type="Material" uid="uid://cukf5oru6nk55" path="res://blockoceanwater.tres" id="1_u81nn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mjspu"]
+sky_top_color = Color(0.392332, 0.563421, 0.93074, 1)
+sky_horizon_color = Color(0.629025, 0.78321, 0.986118, 1)
+ground_bottom_color = Color(0.301654, 0.258959, 0.20941, 1)
+ground_horizon_color = Color(0.115743, 0.471863, 0.630128, 1)
+
+[sub_resource type="Sky" id="Sky_ucbhj"]
+sky_material = SubResource("ProceduralSkyMaterial_mjspu")
+
+[sub_resource type="Environment" id="Environment_lsq6q"]
+background_mode = 2
+sky = SubResource("Sky_ucbhj")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_02m4n"]
+material = ExtResource("1_u81nn")
+size = Vector3(100, 1, 100)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lsq6q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0518781, -0.0232542, 0.00389349)
+mesh = SubResource("BoxMesh_02m4n")

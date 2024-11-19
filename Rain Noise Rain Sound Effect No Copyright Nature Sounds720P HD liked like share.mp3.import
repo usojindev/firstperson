@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddbypgjlylxsh"
+path="res://.godot/imported/Rain Noise Rain Sound Effect No Copyright Nature Sounds720P HD liked like share.mp3-f6f3fc954192f59ff59a730f79dda1c9.mp3str"
+
+[deps]
+
+source_file="res://Rain Noise Rain Sound Effect No Copyright Nature Sounds720P HD liked like share.mp3"
+dest_files=["res://.godot/imported/Rain Noise Rain Sound Effect No Copyright Nature Sounds720P HD liked like share.mp3-f6f3fc954192f59ff59a730f79dda1c9.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

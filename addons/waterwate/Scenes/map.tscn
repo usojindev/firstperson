@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://chm5iqhvix3iw"]
+
+[ext_resource type="Material" uid="uid://bwqjqbj10eohr" path="res://Shaders/watershader.tres" id="1_hdy1s"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_fsvyc"]
+material = ExtResource("1_hdy1s")
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_omcbh"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.37506, 0, 0, 0, 0.360783, 0, 0, 0, 1.47052, 0, 1.19209e-07, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_fsvyc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.656231, 1.66081)
+fov = 80.0408
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.266358, 0, 0, 0, 0.266358, 0, 0, 0, 0.266358, 0, 0, 0)
+mesh = SubResource("CylinderMesh_omcbh")

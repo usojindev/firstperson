@@ -1,0 +1,138 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5kjaf4y2gimf"]
+
+[ext_resource type="Script" path="res://scenes/pause_menu.gd" id="1_jgxrg"]
+[ext_resource type="PackedScene" uid="uid://dotvct22lgdl0" path="res://scenes/volume_slider.tscn" id="2_nj07y"]
+
+[sub_resource type="Theme" id="Theme_nfwqk"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+theme = SubResource("Theme_nfwqk")
+script = ExtResource("1_jgxrg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.0470588, 0.129412, 0.0941176)
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -65.5
+offset_right = 35.0
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Paused"
+
+[node name="resume" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Resume
+"
+
+[node name="options" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Options
+"
+
+[node name="quit to desktop" type="Button" parent="GridContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Quit to desktop
+"
+
+[node name="quit to menu" type="Button" parent="GridContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Quit to main menu
+"
+
+[node name="GridContainer2" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="pixelation toggle" type="CheckButton" parent="GridContainer2"]
+layout_mode = 2
+tooltip_text = "Toggles pixel effect"
+theme_override_font_sizes/font_size = 32
+text = "Pixel Effect"
+
+[node name="Fullscreen" type="CheckButton" parent="GridContainer2"]
+layout_mode = 2
+tooltip_text = "Toggles pixel effect"
+theme_override_font_sizes/font_size = 32
+text = "Fullscreen"
+
+[node name="GridContainer3" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -385.0
+offset_right = 121.0
+offset_bottom = -304.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Master2" type="Label" parent="GridContainer3"]
+layout_mode = 2
+text = "Master"
+
+[node name="volume slider" parent="GridContainer3" instance=ExtResource("2_nj07y")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="Music" type="Label" parent="GridContainer3"]
+layout_mode = 2
+text = "Music
+"
+
+[node name="volume slider2" parent="GridContainer3" instance=ExtResource("2_nj07y")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="Sound" type="Label" parent="GridContainer3"]
+layout_mode = 2
+text = "Sound Effects
+"
+
+[node name="volume slider3" parent="GridContainer3" instance=ExtResource("2_nj07y")]
+layout_mode = 2
+bus_name = "Sound Effects"
+
+[connection signal="pressed" from="GridContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="GridContainer/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="GridContainer/quit to desktop" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="GridContainer/quit to menu" to="." method="_on_quit_to_menu_pressed"]
+[connection signal="toggled" from="GridContainer2/pixelation toggle" to="." method="_on_pixelation_toggle_toggled"]
+[connection signal="toggled" from="GridContainer2/Fullscreen" to="." method="_on_fullscreen_toggled"]

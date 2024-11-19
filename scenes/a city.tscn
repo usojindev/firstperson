@@ -1,0 +1,286 @@
+[gd_scene load_steps=20 format=3 uid="uid://c3q4nclvljsdp"]
+
+[ext_resource type="Script" path="res://scenes/spot_light_3d.gd" id="1_e7qqf"]
+[ext_resource type="Script" path="res://scenes/label_3d.gd" id="2_3fyhq"]
+[ext_resource type="Texture2D" uid="uid://cmqulxpn06vbl" path="res://assets/textures/dev/grids/Dark/texture_07.png" id="2_qwrp6"]
+[ext_resource type="PackedScene" uid="uid://ckpy22ry7vkcv" path="res://scenes/waterscene.tscn" id="2_wmx6u"]
+[ext_resource type="PackedScene" uid="uid://c2a0mq7af2ml" path="res://scenes/player.tscn" id="3_bh0rh"]
+[ext_resource type="Material" uid="uid://b8lwnwtun0pxb" path="res://shaders/nighttimeshader.tres" id="4_htw03"]
+[ext_resource type="PackedScene" uid="uid://bepdml1qelkh1" path="res://scenes/rainonly.tscn" id="5_03alo"]
+[ext_resource type="PackedScene" uid="uid://rbf315j2sk7r" path="res://scenes/killzone.tscn" id="5_g42r2"]
+[ext_resource type="PackedScene" uid="uid://c5kjaf4y2gimf" path="res://scenes/pause_menu.tscn" id="7_djoi1"]
+[ext_resource type="PackedScene" uid="uid://jy24famgptqb" path="res://scenes/button.tscn" id="8_lpw35"]
+[ext_resource type="AudioStream" uid="uid://bask468iy8reu" path="res://assets/sounds/148808__rmutt__oceanwaves-7.wav" id="9_p13d0"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wodpb"]
+load_path = "res://.godot/imported/texture_07.png-1c544baa481bf658d592a13eec8cc5ef.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbkdq"]
+albedo_texture = SubResource("CompressedTexture2D_wodpb")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evlyi"]
+albedo_texture = ExtResource("2_qwrp6")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h27nu"]
+render_priority = -4
+depth_draw_mode = 1
+albedo_color = Color(1, 1, 1, 0)
+proximity_fade_enabled = true
+proximity_fade_distance = 142.24
+
+[sub_resource type="Sky" id="Sky_46g5s"]
+sky_material = ExtResource("4_htw03")
+
+[sub_resource type="Environment" id="Environment_d8ofq"]
+background_mode = 2
+sky = SubResource("Sky_46g5s")
+tonemap_mode = 3
+sdfgi_enabled = true
+glow_enabled = true
+glow_bloom = 0.13
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_length = 4.64
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_saturation = 1.35
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_c0sit"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7bjs1"]
+
+[node name="world" type="Node3D"]
+
+[node name="stage" type="Node3D" parent="."]
+
+[node name="bottom floor" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="bottom stairs" type="CSGBox3D" parent="stage"]
+transform = Transform3D(-0.5, 5.97109e-08, 0.866025, 0.866025, -1.59995e-08, 0.5, 4.37114e-08, 1, -4.37114e-08, 2.39108, -0.497003, 5.18573)
+use_collision = true
+size = Vector3(4, 1, 5)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="bottom stairs3" type="CSGBox3D" parent="stage"]
+transform = Transform3D(6.55671e-08, 1, -8.15665e-08, 0.730912, 7.74289e-09, 0.682471, 0.682471, -1.04365e-07, -0.730912, 1.65162, -3.11161, 10.3931)
+use_collision = true
+size = Vector3(4, 1, 5)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="stairs 2" type="CSGBox3D" parent="stage"]
+transform = Transform3D(-0.5, 5.97109e-08, 0.866025, 0.866025, -1.59995e-08, 0.5, 4.37114e-08, 1, -4.37114e-08, 10.9074, 3.28373, 5.18573)
+use_collision = true
+size = Vector3(1, 1, 5)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="bottom stairs2" type="CSGBox3D" parent="stage"]
+transform = Transform3D(-0.5, 5.97109e-08, 0.866025, 0.866025, -1.59995e-08, 0.5, 4.37114e-08, 1, -4.37114e-08, 2.39108, -0.497003, -4.5777)
+use_collision = true
+size = Vector3(4, 1, 5)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="stairs 3" type="CSGBox3D" parent="stage"]
+transform = Transform3D(-0.5, 5.97109e-08, 0.866025, 0.866025, -1.59995e-08, 0.5, 4.37114e-08, 1, -4.37114e-08, 11.5643, 2.00949, -4.5777)
+use_collision = true
+size = Vector3(4, 1, 5)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="mid floor" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.558, 2, 0)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 21.8405, 8.84401, 1.13956)
+visible = false
+light_color = Color(0.76, 0.74746, 0.6764, 1)
+light_energy = 10.954
+light_indirect_energy = 6.678
+light_volumetric_fog_energy = 9.184
+light_specular = 3.08
+spot_range = 6.97783
+spot_angle = 89.99
+script = ExtResource("1_e7qqf")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8.84962, 4.81067, 6.27718)
+visible = false
+light_color = Color(0.76, 0.74746, 0.6764, 1)
+light_energy = 10.954
+light_indirect_energy = 6.678
+light_volumetric_fog_energy = 9.184
+light_specular = 2.195
+spot_range = 4.56198
+spot_angle = 85.3038
+script = ExtResource("1_e7qqf")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2991, 7.45998, 0.5)
+use_collision = true
+
+[node name="house" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+use_collision = true
+size = Vector3(15, 5, 15)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="house2" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+operation = 2
+use_collision = true
+size = Vector3(13, 4, 13)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="house3" type="CSGBox3D" parent="stage/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 0.5)
+operation = 2
+use_collision = true
+size = Vector3(13, 4, 4)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="top floor" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7991, 4.45998, 0)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="stage/top floor"]
+transform = Transform3D(29.2826, 0, 0, 0, 9.79986, 0, 0, 0, 11.8889, -0.0931969, -108.24, -0.155821)
+size = Vector3(0.69, 22.1832, 1.64)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="stage/top floor/GPUParticlesCollisionBox3D"]
+size = Vector3(0.69, 22.1832, 1.64)
+
+[node name="pillar floor" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.60929, -4.39812, 20.5241)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="stage/pillar floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239911, 1.86252, -8.1072)
+material = SubResource("StandardMaterial3D_evlyi")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="stage/pillar floor/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.9464)
+material = SubResource("StandardMaterial3D_evlyi")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="stage/pillar floor/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85599, 0.891383, 3.6161)
+material = SubResource("StandardMaterial3D_evlyi")
+
+[node name="in ground pool" type="CSGCombiner3D" parent="stage"]
+transform = Transform3D(0.715288, 0, 0, 0, 0.562314, 0, 0, 0, 1, -21.08, -1.16155, -0.180496)
+use_collision = true
+
+[node name="wall" type="CSGBox3D" parent="stage/in ground pool"]
+transform = Transform3D(0.594141, 0, 0, 0, 7.1575, 0, 0, 0, 1, 14.6226, 7.63249, 0.180496)
+use_collision = true
+size = Vector3(3, 2, 20)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="wall2" type="CSGBox3D" parent="stage/in ground pool"]
+transform = Transform3D(1.39804, 0, 0, 0, 5.01025, 0, 0, 0, 1, 14.7634, 6.94137, 0.180496)
+operation = 2
+use_collision = true
+size = Vector3(1.58789, 2, 6)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="bottom floor3" type="CSGBox3D" parent="stage/in ground pool"]
+transform = Transform3D(1.39804, 0, 0, 0, 4.47344, 0, 0, 0, 1, -1.12556, -0.193668, 0.180496)
+use_collision = true
+size = Vector3(21.1621, 1, 20)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="bottom floor4" type="CSGBox3D" parent="stage/in ground pool"]
+transform = Transform3D(1, 0, 0, 0, 2.54917, 0, 0, 0, 1, -2.20621, 1.95821, 0)
+operation = 2
+use_collision = true
+size = Vector3(21.1621, 1, 15.7811)
+material = SubResource("StandardMaterial3D_pbkdq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="stage/in ground pool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20448, 0)
+light_energy = 2.401
+light_indirect_energy = 5.866
+light_volumetric_fog_energy = 3.876
+light_specular = 0.574
+light_bake_mode = 1
+omni_range = 78.984
+omni_attenuation = 0.816
+omni_shadow_mode = 0
+
+[node name="rain box" type="CSGBox3D" parent="."]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+visible = false
+material = SubResource("StandardMaterial3D_h27nu")
+
+[node name="GPUParticles3D" parent="rain box" instance=ExtResource("5_03alo")]
+transform = Transform3D(14.68, 0, 0, 0, 2, 0, 0, 0, 12.9543, 2.5816, 8.40924, -4.40922)
+amount = 286
+
+[node name="environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="environment"]
+environment = SubResource("Environment_d8ofq")
+camera_attributes = SubResource("CameraAttributesPractical_c0sit")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="environment"]
+transform = Transform3D(-0.964373, -0.256251, 0.0657318, -0.156982, 0.754306, 0.637478, -0.212936, 0.604448, -0.767659, 0, 6.88166, 0)
+light_color = Color(0.0980955, 0.503969, 0.63624, 1)
+light_energy = 0.486
+shadow_enabled = true
+
+[node name="player" parent="." instance=ExtResource("3_bh0rh")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 2
+layer = 128
+visible = false
+follow_viewport_enabled = true
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_djoi1")]
+
+[node name="killzone" parent="." instance=ExtResource("5_g42r2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="killzone"]
+transform = Transform3D(3.57, 0, 0, 0, 3.57, 0, 0, 0, 3.57, 0, -11.2358, 2.00314)
+shape = SubResource("WorldBoundaryShape3D_7bjs1")
+
+[node name="MeshInstance3D" parent="killzone" instance=ExtResource("2_wmx6u")]
+transform = Transform3D(632.555, 0, 0, 0, 2.335, 0, 0, 0, 301.35, 0, -13.0734, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="killzone/MeshInstance3D"]
+stream = ExtResource("9_p13d0")
+volume_db = -9.984
+autoplay = true
+max_distance = 78.22
+
+[node name="light switch" parent="." instance=ExtResource("8_lpw35")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.204, 6.20768, 0)
+prompt_message = "toggle light"
+
+[node name="MeshInstance3D" parent="." instance=ExtResource("2_wmx6u")]
+transform = Transform3D(8.50188, 0, 0, 0, 1, 0, 0, 0, 4.32027, -22.6846, -0.570228, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 19.1701, 7.44306, 0)
+visible = false
+billboard = 2
+texture_filter = 2
+render_priority = 2
+outline_render_priority = 0
+outline_modulate = Color(0.642454, 0.134512, 0.597334, 1)
+text = "What even?"
+script = ExtResource("2_3fyhq")
+
+[connection signal="interacted" from="light switch" to="stage/SpotLight3D" method="toggle"]
+[connection signal="interacted" from="light switch" to="stage/SpotLight3D2" method="toggle"]
+[connection signal="interacted" from="light switch" to="Label3D" method="_on_light_switch_interacted"]

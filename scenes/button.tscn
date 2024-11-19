@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://jy24famgptqb"]
+
+[ext_resource type="Script" path="res://Interact/button.gd" id="1_7h3yg"]
+[ext_resource type="AudioStream" uid="uid://07ghtlk6l1n8" path="res://assets/sounds/348225__tbrook__switch-light-05.wav" id="2_wxcla"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qnd01"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d0onb"]
+
+[node name="Button" type="StaticBody3D"]
+script = ExtResource("1_7h3yg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_qnd01")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_d0onb")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_wxcla")
+bus = &"Sound Effects"
+
+[connection signal="interacted" from="." to="." method="_on_interacted"]

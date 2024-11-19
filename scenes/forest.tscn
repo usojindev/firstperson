@@ -1,0 +1,211 @@
+[gd_scene load_steps=32 format=3 uid="uid://75ifwqb3703i"]
+
+[ext_resource type="Material" uid="uid://b8lwnwtun0pxb" path="res://shaders/nighttimeshader.tres" id="1_qtowk"]
+[ext_resource type="Texture2D" uid="uid://cv7oe4p45kdl3" path="res://assets/textures/brown_mud_leaves_01_1k/textures/brown_mud_leaves_01_diff_1k.png" id="2_wco5d"]
+[ext_resource type="Texture2D" uid="uid://dfuq8vk0se24q" path="res://assets/textures/brown_mud_leaves_01_1k/textures/brown_mud_leaves_01_nor_gl_1k.png" id="3_1r6uu"]
+[ext_resource type="Texture2D" uid="uid://b0vhi2n3ldxpj" path="res://assets/textures/brown_mud_leaves_01_1k/textures/brown_mud_leaves_01_rough_1k.png" id="4_71857"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="5_ggkrd"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="6_w6xkr"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="7_u0xxj"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="8_fko5r"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="9_rrnau"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="10_w61k1"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="11_cp486"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="12_sgjpb"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="13_626kt"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="14_i7a12"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="14_yhvnt"]
+[ext_resource type="PackedScene" uid="uid://c2a0mq7af2ml" path="res://scenes/player.tscn" id="15_10fwo"]
+[ext_resource type="AudioStream" uid="uid://drjnh6ynl52og" path="res://assets/sounds/195617__julius_galla__animals-crickets-loop.wav" id="17_wmbxb"]
+[ext_resource type="AudioStream" uid="uid://chh3mwaoogn4n" path="res://assets/sounds/530907__nox_sound__ambiance_wind_forest_trees_loop_02.wav" id="18_o4myc"]
+[ext_resource type="Material" uid="uid://bwqjqbj10eohr" path="res://shaders/watershader.tres" id="19_j7m62"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4pdpy"]
+seamless = true
+
+[sub_resource type="Sky" id="Sky_6d5ie"]
+sky_material = ExtResource("1_qtowk")
+
+[sub_resource type="Environment" id="Environment_mxusr"]
+background_mode = 2
+sky = SubResource("Sky_6d5ie")
+ambient_light_source = 2
+ambient_light_color = Color(0.503836, 0.651887, 0.966489, 1)
+ambient_light_energy = 0.32
+tonemap_mode = 3
+tonemap_exposure = 1.5
+glow_enabled = true
+glow_intensity = 1.84
+glow_strength = 0.91
+glow_bloom = 0.36
+glow_hdr_threshold = 1.27
+glow_hdr_luminance_cap = 9.52
+glow_map_strength = 0.55
+glow_map = SubResource("NoiseTexture2D_4pdpy")
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.1598
+fog_sky_affect = 0.621
+volumetric_fog_density = 0.0258
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_emission = Color(0.0661477, 0.104376, 0.140304, 1)
+volumetric_fog_sky_affect = 0.776
+adjustment_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cwua"]
+albedo_texture = ExtResource("2_wco5d")
+roughness_texture = ExtResource("4_71857")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("3_1r6uu")
+uv1_triplanar = true
+
+[sub_resource type="Resource" id="Resource_47ptb"]
+script = ExtResource("8_fko5r")
+amount = 800
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_u750r"]
+script = ExtResource("9_rrnau")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(5, 360, 10)
+scale = Vector3(0.1, 0.1, 0.1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_nhtgy"]
+script = ExtResource("10_w61k1")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+use_computeshader = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_mrv4x"]
+script = ExtResource("11_cp486")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+exclude_mask = 0
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_34rjt"]
+script = ExtResource("6_w6xkr")
+stack = Array[ExtResource("7_u0xxj")]([SubResource("Resource_47ptb"), SubResource("Resource_u750r"), SubResource("Resource_nhtgy"), SubResource("Resource_mrv4x")])
+
+[sub_resource type="Resource" id="Resource_y172w"]
+script = ExtResource("14_i7a12")
+size = Vector3(40, 1, 40)
+
+[sub_resource type="Resource" id="Resource_a5gg0"]
+script = ExtResource("14_yhvnt")
+radius = 3.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cv8ku"]
+lightmap_size_hint = Vector2i(12, 12)
+material = ExtResource("19_j7m62")
+size = Vector2(2, 4)
+subdivide_width = 20
+
+[node name="world" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.023196, 0.464666, 0.885182, -0.499465, 0.772388, -0.392367, 0, 5.55398, 0)
+light_color = Color(0.307338, 0.425346, 0.619731, 1)
+light_angular_distance = 1.66
+shadow_enabled = true
+shadow_normal_bias = 5.134
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mxusr")
+
+[node name="floor" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(40, 1, 40)
+material = SubResource("StandardMaterial3D_1cwua")
+
+[node name="ProtonScatter" type="Node3D" parent="floor"]
+transform = Transform3D(1.01101, 0, 0, 0, 1.00085, 0, 0, 0, 1.00085, 0, 0, 0)
+script = ExtResource("5_ggkrd")
+keep_static_colliders = true
+modifier_stack = SubResource("Resource_34rjt")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="bushes" type="Node3D" parent="floor/ProtonScatter"]
+visible = false
+script = ExtResource("12_sgjpb")
+proportion = 20
+path = "res://addons/proton_scatter/demos/assets/bush.tscn"
+
+[node name="small rocks" type="Node3D" parent="floor/ProtonScatter"]
+script = ExtResource("12_sgjpb")
+proportion = 70
+path = "res://addons/proton_scatter/demos/assets/small_rock.tscn"
+
+[node name="grass" type="Node3D" parent="floor/ProtonScatter"]
+visible = false
+script = ExtResource("12_sgjpb")
+proportion = 70
+path = "res://addons/proton_scatter/demos/assets/grass_2.tscn"
+
+[node name="trees" type="Node3D" parent="floor/ProtonScatter"]
+transform = Transform3D(1.78844, 0, 0, 0, 1, 0, 0, 0, 1.2019, 0, 0, 0)
+script = ExtResource("12_sgjpb")
+proportion = 30
+source_scale_multiplier = 4.0
+path = "res://addons/proton_scatter/demos/assets/pine_tree.tscn"
+
+[node name="ScatterShape" type="Node3D" parent="floor/ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("13_626kt")
+shape = SubResource("Resource_y172w")
+
+[node name="negative space" type="Node3D" parent="floor/ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("13_626kt")
+negative = true
+shape = SubResource("Resource_a5gg0")
+
+[node name="player" parent="." instance=ExtResource("15_10fwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.279809, 0.340519, 2.74075)
+collision_layer = 3
+collision_mask = 3
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer" parent="player"]
+stream = ExtResource("18_o4myc")
+volume_db = -17.937
+autoplay = true
+bus = &"Sound Effects"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("17_wmbxb")
+volume_db = -15.787
+autoplay = true
+max_distance = 1193.9
+bus = &"Sound Effects"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(26.9622, 0, 0, 0, 1, 0, 0, 0, 15.8413, -1.45732, 0, 0)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_cv8ku")
+
+[editable path="player"]

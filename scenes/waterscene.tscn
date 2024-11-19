@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckpy22ry7vkcv"]
+
+[ext_resource type="Material" uid="uid://bwqjqbj10eohr" path="res://shaders/watershader.tres" id="1_d3jdj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cv8ku"]
+lightmap_size_hint = Vector2i(12, 12)
+material = ExtResource("1_d3jdj")
+size = Vector2(2, 4)
+subdivide_width = 20
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(7.36168, 0, 0, 0, 1, 0, 0, 0, 4.28324, 0, 0, 0)
+sorting_use_aabb_center = false
+mesh = SubResource("PlaneMesh_cv8ku")
